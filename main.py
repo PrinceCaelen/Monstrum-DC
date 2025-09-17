@@ -32,9 +32,9 @@ class MonstrumBot(commands.Bot):
     def __init__(self):
         # Define intents
         intents = discord.Intents.default()
-        # Note: The following intents require approval in Discord Developer Portal
-        # intents.members = True  # Required for welcome messages and invite tracking  
-        # intents.invites = True  # Required for invite tracking
+        # Enable privileged intents (required for welcome messages and invite tracking)
+        intents.members = True  # Required for welcome messages and role assignment
+        intents.invites = True  # Required for invite tracking
         intents.message_content = True  # Required for message commands
         
         super().__init__(
