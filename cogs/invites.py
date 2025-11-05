@@ -1,5 +1,5 @@
 """
-Invite Tracking Cog for Monstrum Discord Bot
+Invite Tracking Cog for Lua Corporation Discord Bot
 Tracks who invited new members and maintains statistics
 
 Features:
@@ -202,7 +202,7 @@ class InviteTracker(commands.Cog):
             )
             
             embed.set_thumbnail(url=inviter.avatar.url if inviter.avatar else inviter.default_avatar.url)
-            embed.set_footer(text="Building our cursed crew, one soul at a time...")
+            embed.set_footer(text=config.BOT_FOOTER)
             embed.timestamp = discord.utils.utcnow()
             
             await channel.send(embed=embed)
@@ -211,7 +211,7 @@ class InviteTracker(commands.Cog):
             logger.error(f"Error sending invite attribution: {e}")
     
     def get_recruitment_rank(self, total_invites):
-        """Get a horror-themed rank based on invite count"""
+        """Get a themed rank based on invite count"""
         if total_invites >= 100:
             return "🦑 **Leviathan Summoner**"
         elif total_invites >= 50:

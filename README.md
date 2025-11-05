@@ -1,37 +1,36 @@
-# 🎃 Monstrum Discord Bot
+# ⚡ Lua Corporation Discord Bot
 
-A professional, horror-themed Discord bot designed for the Monstrum game community. Built with Python and discord.py, featuring modular architecture and rich Discord integrations.
+A professional Discord bot for Lua Corporation with Umbrella Corporation-inspired design. Built with Python and discord.py, featuring streamlined modular architecture and corporate-grade functionality.
 
 ## ✨ Features
 
-### 🎭 Welcome System
-- **Horror-themed welcome messages** - Random spooky greetings for new members
-- **Server boost detection** - Thank you messages for boosters
-- **Rich embeds** with member information and server stats
+### � Professional Welcome System
+- **Corporate-themed welcome messages** - Professional greetings for new members
+- **Server boost recognition** - Acknowledge member contributions
+- **Clean embeds** with member information and server stats
 
-### 📨 Invite Tracking
-- **Advanced invite tracking** - See who invited new members
-- **Attribution messages** - Credit inviters when members join
-- **Statistics tracking** - Total invites, current members, retention rates
-- **Horror-themed ranks** - From "Fresh Recruit" to "Leviathan Summoner"
+### � Invite Tracking
+- **Advanced invite tracking** - Monitor who invited new members
+- **Attribution system** - Credit inviters automatically
+- **Statistics tracking** - Total invites, current members, retention metrics
+- **Professional ranks** - Recognition system for top recruiters
 
-### 🏆 Leaderboard System
-- **Invite leaderboards** - Multiple sorting options (total, current, retention)
-- **Personal statistics** - Check your own recruitment record
-- **Server overview** - Community recruitment health metrics
-- **Paginated results** for large servers
-
-### 🎭 Role Assignment
+### � Role Management
 - **Button-based role selection** - Modern Discord UI components
-- **Reaction roles** - Classic emoji-based role assignment
-- **Self-service roles** - Members can manage their own roles
-- **Horror-themed interface** with custom emojis
+- **Self-service roles** - Members manage their own roles
+- **Professional interface** - Clean, corporate design
 
-### 🎮 Game Information
-- **Monstrum game data** - Comprehensive game information
-- **Monster profiles** - Detailed info about each creature
-- **Survival tips** - Help players improve their gameplay
-- **Admin announcements** - Post updates, news, and patch notes
+### 📢 Announcement System
+- **Unified announcement command** - Single command for all announcements
+- **Professional formatting** - Corporate-grade embeds
+- **Image attachment support** - Visual announcements
+- **Admin-only access** - Controlled communication
+
+### � Support Ticket System
+- **Professional ticket system** - Dropdown menu interface
+- **Automated organization** - Category-based channel management
+- **Staff notifications** - Alert system for urgent requests
+- **Transcript generation** - Complete ticket history logging
 
 ## 🚀 Setup Instructions
 
@@ -42,25 +41,24 @@ A professional, horror-themed Discord bot designed for the Monstrum game communi
 
 ### Installation
 
-1. **Clone or download** this bot to your server
-2. **Install dependencies**:
+1. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Configure the bot**:
-   - Copy `.env.example` to `.env`
-   - Fill in your bot token and server IDs
-   - Update `config.py` with your specific settings
+2. **Configure the bot**:
+   - Update `config.py` with your bot token and server IDs
+   - Customize company name and branding in config.py
+   - Set channel IDs for welcome, announcements, etc.
 
-4. **Set up Discord permissions**:
+3. **Required Discord Bot Permissions**:
    - `Manage Roles` - For role assignment
-   - `Manage Messages` - For reaction roles
+   - `Manage Channels` - For ticket system
    - `View Server Insights` - For invite tracking
-   - `Send Messages` - Basic functionality
-   - `Use Slash Commands` - Modern command interface
+   - `Send Messages` & `Embed Links` - Basic functionality
+   - `Manage Messages` - For ticket management
 
-5. **Run the bot**:
+4. **Run the bot**:
    ```bash
    python main.py
    ```
@@ -68,157 +66,157 @@ A professional, horror-themed Discord bot designed for the Monstrum game communi
 ## ⚙️ Configuration
 
 ### Required Setup
-Edit `config.py` and replace placeholder values:
+Edit `config.py`:
 
 ```python
-# Bot token (use environment variable in production)
+# Bot Configuration
 TOKEN = 'your_bot_token_here'
+PREFIX = '!'
 
-# Server and channel IDs
-GUILD_ID = 123456789012345678
-WELCOME_CHANNEL_ID = 123456789012345678
-ANNOUNCEMENTS_CHANNEL_ID = 123456789012345678
+# Branding
+COMPANY_NAME = "Lua Corporation"
+COMPANY_TAGLINE = "Excellence Through Innovation"
 
-# Role IDs for role selection
+# Server Configuration
+GUILD_ID = your_server_id
+WELCOME_CHANNEL_ID = your_welcome_channel_id
+ANNOUNCEMENTS_CHANNEL_ID = your_announcements_channel_id
+
+# Role IDs
 ROLE_SELECTION_ROLES = {
-    '🎮': 123456789012345678,  # Gamer role
-    '👻': 123456789012345678,  # Horror Fan role
-    # ... etc
+    '🎮': your_role_id,  # Member role
 }
-```
+AUTO_ROLE_ID = your_auto_role_id
 
-### Environment Variables (Recommended)
-Create a `.env` file:
-```env
-DISCORD_TOKEN=your_bot_token_here
-GUILD_ID=123456789012345678
-WELCOME_CHANNEL_ID=123456789012345678
-# ... other IDs
+# Admin Roles
+ADMIN_ROLES = [
+    your_admin_role_id,
+    your_moderator_role_id,
+]
 ```
 
 ## 📁 Project Structure
 
 ```
-DiscordBot/
+Lua-Corporation-Bot/
 ├── main.py                 # Bot entry point
-├── config.py              # Configuration and settings
+├── config.py              # Centralized configuration
 ├── requirements.txt       # Python dependencies
-├── README.md             # This file
-├── .env.example          # Environment template
+├── README.md             # Documentation
 └── cogs/                 # Bot modules
     ├── welcome.py        # Welcome system
     ├── invites.py        # Invite tracking
-    ├── leaderboard.py    # Statistics and rankings
     ├── roles.py          # Role management
-    └── info.py           # Game information
+    ├── tickets.py        # Support ticket system
+    ├── announcements.py  # Announcement system
+    └── help.py           # Help command
 ```
 
-## 🎯 Commands
+## 🎯 Essential Commands
 
-### General Commands
-- `!leaderboard` / `!lb` - Show invite leaderboard
-- `!invites [@user]` - Check invite statistics
-- `!mystats` - Your recruitment record
+### User Commands
+- `!help` - Show all available commands
 - `!roles` - Role selection menu
 - `!myroles` - Show your current roles
-
-### Game Information
-- `!game about` - General Monstrum information
-- `!game monsters` - All monster information
-- `!game monster <name>` - Specific monster details
-- `!game tips` - Survival strategies
-- `!game links` - Official resources
+- `!invites [@user]` - Check invite statistics
+- `!mystats` - Your recruitment record
 
 ### Admin Commands
-- `!game announce <message>` - Post announcements
-- `!game update <version> <changes>` - Post updates
-- `!game news <title> <content>` - Post news
-- `!reactionroles` - Set up reaction roles
-- `!resetinvites [@user]` - Reset invite stats
-
-### Slash Commands
-- `/leaderboard` - Modern leaderboard interface
-- `/roles` - Modern role selection
-- `/invites` - Check invitation stats
-- `/gameinfo` - Game information menu
+- `!announce <message>` - Post professional announcements
+- `!setup ticketpanel` - Create support ticket panel
+- `!setup ticketlog <#channel>` - Set ticket logging channel
+- `!invitemod @user <amount>` - Modify user invite count
+- `!resetinvites [@user]` - Reset invite statistics
 
 ## 🔧 Customization
 
-### Adding New Welcome Messages
-Edit `config.py`:
+### Theme Colors (Umbrella Corporation Style)
+Edit `THEME_COLORS` in `config.py`:
 ```python
-WELCOME_MESSAGES = [
-    "Your new horror-themed message here with {mention}!",
-    # Add more messages...
-]
-```
-
-### Modifying Role Selection
-Update `ROLE_SELECTION_ROLES` in `config.py`:
-```python
-ROLE_SELECTION_ROLES = {
-    '🎮': YOUR_ROLE_ID,
-    '👻': YOUR_ROLE_ID,
-    # Add more emoji/role pairs...
+THEME_COLORS = {
+    'primary': 0x000000,      # Black
+    'secondary': 0x8B0000,    # Dark Red
+    'accent': 0xFFFFFF,       # White
+    'success': 0x00FF00,      # Green
+    'warning': 0xFFAA00,      # Amber
+    'error': 0xFF0000,        # Red
 }
 ```
 
-### Custom Game Information
-Modify `GAME_INFO` and `MONSTERS` dictionaries in `config.py`.
+### Welcome Messages
+Edit `WELCOME_MESSAGES` in `config.py`:
+```python
+WELCOME_MESSAGES = [
+    "⚡ **{mention}** has joined {company}. Welcome to excellence.",
+    # Add more professional messages...
+]
+```
+
+### Ticket Types
+Modify `TICKET_CONFIG` in `config.py`:
+```python
+'ticket_types': {
+    '❓': {'name': 'General Support', 'description': 'Questions...'},
+    '⚠️': {'name': 'Report Issue', 'description': 'Report...'},
+    # Add custom ticket types...
+}
+```
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
 **Bot doesn't respond to commands**
-- Check bot permissions
-- Verify bot token is correct
+- Verify bot token is correct in `config.py`
+- Check bot has required permissions
 - Ensure bot is online and in your server
 
 **Invite tracking not working**
 - Bot needs "View Server Insights" permission
-- Check if `WELCOME_CHANNEL_ID` is configured
+- Verify `WELCOME_CHANNEL_ID` is configured correctly
 
 **Role assignment failing**
 - Bot needs "Manage Roles" permission
-- Bot's role must be above roles it manages
-- Verify role IDs in `config.py`
+- Bot's role must be higher than roles it manages
+- Check role IDs in `config.py`
 
-**Welcome messages not sending**
-- Check `WELCOME_CHANNEL_ID` configuration
-- Verify bot has send message permissions in that channel
+**Ticket system not working**
+- Run `!setup ticketpanel` to create the ticket interface
+- Ensure bot has "Manage Channels" permission
+- Verify admin roles are configured correctly
 
 ### Logs
-Check `bot.log` for detailed error information.
+Check `bot.log` for detailed error information and debugging.
 
-## 🔒 Security
+## 🔒 Security Best Practices
 
-- **Never commit your bot token** to version control
-- Use environment variables for sensitive data
-- Regularly rotate your bot token
-- Review bot permissions regularly
+- **Never commit bot token** to version control
+- Store sensitive data in environment variables
+- Regularly review bot permissions
+- Keep dependencies updated
+- Monitor bot logs for suspicious activity
 
-## 🤝 Contributing
+## 🎨 Design Philosophy
 
-This bot is designed to be easily extensible:
-
-1. **New features** go in the `cogs/` directory
-2. **Configuration** goes in `config.py`
-3. **Follow the existing code style** and patterns
-4. **Test thoroughly** before deploying
+This bot embodies professional corporate design inspired by the Umbrella Corporation:
+- **Clean, minimalist interfaces**
+- **Professional black and red color scheme**
+- **Streamlined, essential commands only**
+- **No unnecessary features or bloat**
+- **Corporate-grade reliability**
 
 ## 📝 License
 
-This project is provided as-is for educational and community use. Monstrum is a trademark of Team Junkfish.
+This project is provided for Lua Corporation. All rights reserved.
 
 ## 🆘 Support
 
-For issues or questions:
-1. Check the troubleshooting section above
-2. Review the bot logs
-3. Ensure all configuration is correct
-4. Check Discord.py documentation for API issues
+For technical support:
+1. Check troubleshooting section
+2. Review `bot.log` for errors
+3. Verify configuration in `config.py`
+4. Consult Discord.py documentation
 
 ---
 
-*Built with ❤️ for the Monstrum horror gaming community* 🦑
+**Lua Corporation** • *Excellence Through Innovation* ⚡

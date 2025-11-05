@@ -1,9 +1,9 @@
 """
-Advanced Ticket System for Monstrum Discord Bot
+Advanced Ticket System for Lua Corporation Discord Bot
 Professional ticket system with dropdown menu and proper channel management
 
 Features:
-- Clean dropdown menu interface (no command spam)
+- Clean dropdown menu interface
 - Professional ticket creation and management
 - Proper channel isolation and privacy
 - Staff notification system
@@ -16,7 +16,7 @@ import logging
 import asyncio
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import config
 
 logger = logging.getLogger(__name__)
@@ -363,15 +363,15 @@ class TicketSystem(commands.Cog):
         """Set up the ticket creation panel"""
         
         embed = self.create_ticket_embed(
-            "🎫 Monstrum Support System",
+            f"{config.COMPANY_NAME} Support System",
             (
-                f"Welcome to the **{config.TICKET_CONFIG['server_name']}** support system!\n\n"
+                f"Welcome to the **{config.COMPANY_NAME}** support system.\n\n"
                 "**How it works:**\n"
                 "🔸 Select a ticket type from the dropdown below\n"
                 "🔸 A private support channel will be created for you\n"
                 "🔸 Our team will assist you promptly\n"
                 "🔸 Your ticket will be handled professionally and privately\n\n"
-                "**Need immediate help?** Create a ticket below! 👇"
+                "**Need immediate help?** Create a ticket below."
             ),
             guild=ctx.guild
         )
@@ -648,7 +648,7 @@ class TicketSystem(commands.Cog):
                 messages.append(f"[{timestamp}] {message.author.display_name}: {content}")
             
             # Create transcript content
-            transcript_content = f"""MONSTRUM SUPPORT TICKET TRANSCRIPT
+            transcript_content = f"""{config.COMPANY_NAME.upper()} SUPPORT TICKET TRANSCRIPT
 =====================================
 Ticket: {channel.name}
 Closed by: {closed_by.display_name} ({closed_by.id})
@@ -780,12 +780,15 @@ CONVERSATION:
     @tasks.loop(hours=1)
     async def auto_close_tickets(self):
         """Auto-close old inactive tickets"""
-        current_time = datetime.now()
+        current_time = datetime.now(timezone.utc)
         tickets_to_close = []
         
         for channel_id, ticket_data in self.active_tickets.items():
             try:
                 created_at = datetime.fromisoformat(ticket_data['created_at'])
+                # Make created_at timezone-aware if it isn't
+                if created_at.tzinfo is None:
+                    created_at = created_at.replace(tzinfo=timezone.utc)
                 age_hours = (current_time - created_at).total_seconds() / 3600
                 
                 if age_hours >= config.TICKET_CONFIG['auto_close_hours']:

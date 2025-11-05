@@ -1,11 +1,15 @@
 """
-Role Assignment Cog for Monstrum Discord Bot
+Role Assignment Cog for Lua Corporation Discord Bot
 Handles reaction roles and button-based role selection
 
 Features:
 - Reaction-based role assignment
 - Button-based role selection with Discord UI
-- Horror-themed role selection interface
+"""
+Role Management Cog
+==================
+Manages server roles and role selection
+- Professional role selection interface
 - Admin controls for role management
 """
 
@@ -23,20 +27,20 @@ class RoleSelectionView(discord.ui.View):
         super().__init__(timeout=None)  # Persistent view
         
     @discord.ui.button(
-        label="Monstrum Player", 
-        emoji="🚢", 
+        label="Member", 
+        emoji="🎮", 
         style=discord.ButtonStyle.primary,
-        custom_id="role_monstrum"
+        custom_id="role_member"
     )
-    async def monstrum_role(self, button: discord.ui.Button, interaction: discord.Interaction):
-        await self.handle_role_toggle(interaction, "monstrum", "🚢")
+    async def member_role(self, button: discord.ui.Button, interaction: discord.Interaction):
+        await self.handle_role_toggle(interaction, "member", "🎮")
     
     async def handle_role_toggle(self, interaction: discord.Interaction, role_key: str, emoji: str):
         """Handle role assignment/removal"""
         try:
             # Get role mapping
             role_map = {
-                "monstrum": config.ROLE_SELECTION_ROLES.get('🚢'),
+                "member": config.ROLE_SELECTION_ROLES.get('🎮'),
             }
             
             role_id = role_map.get(role_key)
@@ -100,12 +104,12 @@ class RoleAssignment(commands.Cog):
     async def roles_menu(self, ctx):
         """Display the role selection menu"""
         embed = discord.Embed(
-            title="🎭 Choose Your Role",
+            title="🎭 Role Selection",
             description=(
-                "Click the button below to get the Monstrum Player role!\n"
+                "Click the button below to assign yourself the Member role.\n"
                 "This gives you access to exclusive content and discussions.\n\n"
                 "**Available Role:**\n"
-                "🚢 **Monstrum Player** - Active community member with game access"
+                "🎮 **Member** - Active community member"
             ),
             color=config.EMBED_COLORS['info']
         )
@@ -120,7 +124,7 @@ class RoleAssignment(commands.Cog):
             inline=False
         )
         
-        embed.set_footer(text="Choose wisely, the monsters are watching... 👁️")
+        embed.set_footer(text=config.BOT_FOOTER)
         embed.timestamp = discord.utils.utcnow()
         
         view = RoleSelectionView()
@@ -133,8 +137,8 @@ class RoleAssignment(commands.Cog):
         embed = discord.Embed(
             title="🎭 Reaction Role Setup",
             description=(
-                "React to this message to get the Monstrum Player role!\n\n"
-                "🚢 - **Monstrum Player Role**"
+                "React to this message to get the Member role.\n\n"
+                "🎮 - **Member Role**"
             ),
             color=config.EMBED_COLORS['info']
         )

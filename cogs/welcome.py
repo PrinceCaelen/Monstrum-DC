@@ -1,10 +1,10 @@
 """
-Welcome System Cog for Monstrum Discord Bot
+Welcome System Cog for Lua Corporation Discord Bot
 Handles new member welcomes and server boost thank you messages
 
 Features:
-- Horror-themed welcome messages with random selection
-- Rich Discord embeds with Monstrum theming
+- Professional corporate welcome messages
+- Rich Discord embeds with corporate theming
 - Server boost detection and thank you messages
 - Member count tracking
 """
@@ -88,14 +88,14 @@ class Welcome(commands.Cog):
             logger.error(f"Error handling member update for {after.name}: {e}")
     
     async def create_welcome_embed(self, member):
-        """Create a horror-themed welcome embed"""
+        """Create a professional welcome embed"""
         # Get random welcome message and color
         welcome_message = config.get_random_welcome_message(member.mention)
         embed_color = config.get_random_color()
         
         # Create embed
         embed = discord.Embed(
-            title="🚢 A New Soul Boards the Vessel",
+            title=f"⚡ {config.COMPANY_NAME} - New Member",
             description=welcome_message,
             color=embed_color
         )
@@ -105,7 +105,7 @@ class Welcome(commands.Cog):
         
         # Add member info
         embed.add_field(
-            name="🆔 Survivor ID", 
+            name="🆔 User ID", 
             value=f"`{member.id}`", 
             inline=True
         )
@@ -115,14 +115,14 @@ class Welcome(commands.Cog):
             inline=True
         )
         embed.add_field(
-            name="👥 Crew Size", 
-            value=f"`{member.guild.member_count}` souls", 
+            name="👥 Total Members", 
+            value=f"`{member.guild.member_count}`", 
             inline=True
         )
         
-        # Add footer with horror flavor
+        # Add professional footer
         embed.set_footer(
-            text=f"Welcome to {member.guild.name} • The monsters are watching...",
+            text=config.BOT_FOOTER,
             icon_url=member.guild.icon.url if member.guild.icon else None
         )
         
@@ -180,7 +180,7 @@ class Welcome(commands.Cog):
         )
         embed.add_field(
             name="🌟 Your Contribution", 
-            value="Powering our nightmare!", 
+            value="Powering our excellence!", 
             inline=True
         )
         
@@ -361,24 +361,23 @@ class Welcome(commands.Cog):
         for channel in general_channels:
             if channel and channel.permissions_for(guild.me).send_messages:
                 embed = discord.Embed(
-                    title="👻 Monstrum Bot Has Arrived!",
+                    title=f"⚡ {config.COMPANY_NAME} Bot Online",
                     description=(
-                        "Thank you for inviting me to your server! I'm here to bring some horror-themed "
-                        "fun to your Discord community.\n\n"
-                        "**🎃 What I can do:**\n"
-                        "• Welcome new members with spooky messages\n"
-                        "• Thank server boosters\n"
-                        "• Track invites and create leaderboards\n"
-                        "• Manage role selection with reactions\n"
-                        "• Share Monstrum game information\n\n"
+                        f"Thank you for adding **{config.COMPANY_NAME} Bot** to your server.\n\n"
+                        "**� Bot Capabilities:**\n"
+                        "• Professional welcome system for new members\n"
+                        "• Server boost recognition\n"
+                        "• Invite tracking and statistics\n"
+                        "• Role management system\n"
+                        "• Professional support ticket system\n\n"
                         "**⚙️ Setup Required:**\n"
                         "Please configure the bot by updating the channel IDs in `config.py` "
                         "to match your server's channels.\n\n"
-                        "Use `!help` to see all available commands!"
+                        "Use `!help` to see all available commands."
                     ),
                     color=config.EMBED_COLORS['welcome']
                 )
-                embed.set_footer(text="Ready to bring nightmares to your server! 🦑")
+                embed.set_footer(text=config.BOT_FOOTER)
                 await channel.send(embed=embed)
                 break
 

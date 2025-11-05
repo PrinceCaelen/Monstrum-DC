@@ -1,9 +1,9 @@
 """
-Help Command Cog for Monstrum Discord Bot
-Custom help system with horror theming and organized commands
+Help Command Cog for Lua Corporation Discord Bot
+Custom help system with professional theming and organized commands
 
 Features:
-- Horror-themed help interface
+- Professional help interface
 - Organized command categories
 - Interactive help menus
 - Admin command filtering
@@ -35,10 +35,10 @@ class HelpCommand(commands.Cog):
     async def show_main_help(self, ctx):
         """Show the main help menu"""
         embed = discord.Embed(
-            title="🎃 Monstrum Bot - Command Help",
+            title=f"⚡ {config.COMPANY_NAME} Bot - Command Help",
             description=(
-                "Welcome to the cursed help system! Use the commands below to navigate "
-                "the dark waters of our bot's capabilities.\n\n"
+                f"Welcome to {config.COMPANY_NAME} help system! Use the commands below to navigate "
+                "through our bot features.\n\n"
                 f"**Prefix:** `{ctx.prefix}`\n"
                 f"**Use:** `{ctx.prefix}help <category>` for detailed information"
             ),
@@ -58,10 +58,6 @@ class HelpCommand(commands.Cog):
             "🎮 **Roles**": {
                 "description": "Role selection and management",
                 "command": f"`{ctx.prefix}help roles`"
-            },
-            "🚢 **Game Info**": {
-                "description": "Monstrum game information and tips",
-                "command": f"`{ctx.prefix}help game`"
             },
             "🎫 **Tickets**": {
                 "description": "Support ticket system",
@@ -109,7 +105,7 @@ class HelpCommand(commands.Cog):
         )
         
         embed.set_footer(
-            text=f"The ship has {len(self.bot.commands)} commands available • {config.BOT_FOOTER}"
+            text=f"{len(self.bot.commands)} commands available • {config.BOT_FOOTER}"
         )
         embed.timestamp = discord.utils.utcnow()
         
@@ -124,8 +120,6 @@ class HelpCommand(commands.Cog):
             await self.show_invites_help(ctx)
         elif category in ['roles', 'role', 'selection']:
             await self.show_roles_help(ctx)
-        elif category in ['game', 'gameinfo', 'monstrum', 'info']:
-            await self.show_game_help(ctx)
         elif category in ['tickets', 'ticket', 'support']:
             await self.show_tickets_help(ctx)
         elif category in ['admin', 'administrator', 'mod']:
@@ -139,7 +133,6 @@ class HelpCommand(commands.Cog):
                     "• `general` - Basic commands\n"
                     "• `invites` - Invite tracking\n"
                     "• `roles` - Role management\n"
-                    "• `game` - Game information\n"
                     "• `tickets` - Support system\n"
                     "• `admin` - Admin commands"
                 ),
@@ -229,7 +222,7 @@ class HelpCommand(commands.Cog):
         
         embed.add_field(
             name="🎮 Available Role",
-            value=" **Monstrum Player** - Active community member with game access",
+            value="**Member** - Active community member",
             inline=False
         )
         
@@ -277,36 +270,6 @@ class HelpCommand(commands.Cog):
                 "• **Auto-Close** - Inactive tickets auto-close\n"
                 "• **User Limits** - Prevent ticket spam"
             ),
-            inline=False
-        )
-        
-        await ctx.send(embed=embed)
-    
-    async def show_game_help(self, ctx):
-        """Show game information commands help"""
-        embed = discord.Embed(
-            title="🚢 Monstrum Game Commands",
-            description="Get information about the Monstrum horror game",
-            color=config.EMBED_COLORS['game_info']
-        )
-        
-        commands_info = [
-            (f"`{ctx.prefix}game about`", "General information about Monstrum"),
-            (f"`{ctx.prefix}game monsters`", "Information about all three monsters"),
-            (f"`{ctx.prefix}game monster <name>`", "Detailed info about a specific monster"),
-            (f"`{ctx.prefix}game tips`", "Survival strategies and tips"),
-            (f"`{ctx.prefix}game links`", "Official links and resources"),
-        ]
-        
-        embed.add_field(
-            name="📋 Available Commands",
-            value="\n".join([f"**{cmd}**\n└ {desc}" for cmd, desc in commands_info]),
-            inline=False
-        )
-        
-        embed.add_field(
-            name="👹 Monster Names",
-            value="� `hutman` • � `shaytan`",
             inline=False
         )
         

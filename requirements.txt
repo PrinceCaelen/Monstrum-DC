@@ -1,5 +1,5 @@
 # Discord Bot Requirements
-# Core dependencies for the Monstrum Discord Bot
+# Core dependencies for the Lua Corporation Discord Bot
 
 # Discord.py - Main Discord API wrapper
 discord.py>=2.3.0

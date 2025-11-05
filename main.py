@@ -1,9 +1,9 @@
 """
-Monstrum Discord Bot - Main Entry Point
-A professional Discord bot for the horror game community
+Lua Corporation Discord Bot - Main Entry Point
+A professional Discord bot for Lua Corporation
 
-Author: Discord Bot Assistant
-Version: 1.0.0
+Author: Lua Corporation Development Team
+Version: 2.0.0
 """
 
 import discord
@@ -26,8 +26,8 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-class MonstrumBot(commands.Bot):
-    """Custom bot class for the Monstrum community"""
+class LuaCorporationBot(commands.Bot):
+    """Custom bot class for Lua Corporation"""
     
     def __init__(self):
         # Define intents
@@ -42,7 +42,7 @@ class MonstrumBot(commands.Bot):
             intents=intents,
             help_command=None,  # We'll create a custom help command
             case_insensitive=True,
-            description="A horror-themed Discord bot for the Monstrum community 🎃"
+            description=f"Professional Discord bot for {config.COMPANY_NAME}"
         )
         
         # Store invite cache for tracking (will be empty without invite intent)
@@ -50,7 +50,7 @@ class MonstrumBot(commands.Bot):
         
     async def setup_hook(self):
         """Called when the bot is starting up"""
-        logger.info("🎃 Monstrum Bot is awakening from the shadows...")
+        logger.info(f"⚡ {config.COMPANY_NAME} Bot initializing...")
         
         # Load all cogs
         await self.load_cogs()
@@ -84,14 +84,14 @@ class MonstrumBot(commands.Bot):
     
     async def on_ready(self):
         """Called when the bot is ready and connected"""
-        logger.info(f"👻 {self.user} has risen from the depths!")
-        logger.info(f"🏰 Connected to {len(self.guilds)} server(s)")
-        logger.info(f"👥 Watching over {len(self.users)} souls")
+        logger.info(f"✅ {self.user} is now online")
+        logger.info(f"� Connected to {len(self.guilds)} server(s)")
+        logger.info(f"👥 Serving {len(self.users)} users")
         
         # Set bot status
         activity = discord.Activity(
             type=discord.ActivityType.watching,
-            name="for new victims in Monstrum 🦑"
+            name=f"{config.COMPANY_NAME} | {config.PREFIX}help"
         )
         await self.change_presence(activity=activity)
         
@@ -119,18 +119,18 @@ class MonstrumBot(commands.Bot):
         
         if isinstance(error, commands.MissingPermissions):
             embed = discord.Embed(
-                title="🚫 Forbidden Ritual",
-                description="You lack the dark powers required for this command!",
-                color=discord.Color.red()
+                title="🚫 Access Denied",
+                description="You don't have the required permissions for this command.",
+                color=config.EMBED_COLORS['error']
             )
             await ctx.send(embed=embed)
             return
         
         if isinstance(error, commands.MissingRequiredArgument):
             embed = discord.Embed(
-                title="📜 Incomplete Incantation",
+                title="⚠️ Missing Argument",
                 description=f"Missing required argument: `{error.param.name}`",
-                color=discord.Color.orange()
+                color=config.EMBED_COLORS['warning']
             )
             await ctx.send(embed=embed)
             return
@@ -139,9 +139,9 @@ class MonstrumBot(commands.Bot):
         logger.error(f"Unexpected error in {ctx.command}: {error}")
         
         embed = discord.Embed(
-            title="💀 Something Went Wrong",
-            description="The spirits are restless. Try again later...",
-            color=discord.Color.red()
+            title="❌ Error",
+            description="An error occurred while processing your command. Please try again.",
+            color=config.EMBED_COLORS['error']
         )
         await ctx.send(embed=embed)
 
@@ -153,7 +153,7 @@ async def main():
         return
     
     # Create and run the bot
-    bot = MonstrumBot()
+    bot = LuaCorporationBot()
     
     try:
         async with bot:
@@ -165,7 +165,7 @@ async def main():
     except Exception as e:
         logger.error(f"❌ Unexpected error: {e}")
     finally:
-        logger.info("💀 Monstrum Bot has returned to the shadows...")
+        logger.info(f"⚡ {config.COMPANY_NAME} Bot has shut down")
 
 if __name__ == "__main__":
     # Fix for Windows event loop issue with discord.py and aiodns

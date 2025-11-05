@@ -10,13 +10,33 @@ load_dotenv()
 # ================================
 
 # Bot Token (NEVER commit the actual token to GitHub!)
-TOKEN = os.getenv('DISCORD_TOKEN', 'YOUR_BOT_TOKEN_HERE')
+TOKEN = os.getenv('DISCORD_TOKEN')
 
 # Command Prefix
 PREFIX = '!'
 
 # Bot Owner ID (Replace with your Discord user ID)
 OWNER_ID = int(os.getenv('OWNER_ID', '1400112309766062181'))
+
+# ================================
+# BRANDING CONFIGURATION
+# ================================
+
+# Company/Studio Name
+COMPANY_NAME = "Lua Corporation"
+COMPANY_TAGLINE = "Excellence Through Innovation"
+BOT_NAME = "Lua Corporation Bot"
+
+# Visual Theme (Umbrella Corporation inspired - Professional, Dark, Corporate)
+THEME_COLORS = {
+    'primary': 0x000000,      # Black
+    'secondary': 0x8B0000,    # Dark Red
+    'accent': 0xFFFFFF,       # White
+    'success': 0x00FF00,      # Green
+    'warning': 0xFFAA00,      # Amber
+    'error': 0xFF0000,        # Red
+    'info': 0x1E90FF,         # Dodger Blue
+}
 
 # ================================
 # SERVER CONFIGURATION
@@ -30,14 +50,13 @@ WELCOME_CHANNEL_ID = int(os.getenv('WELCOME_CHANNEL_ID', '1417465985278939220'))
 BOOST_CHANNEL_ID = int(os.getenv('BOOST_CHANNEL_ID', '1417466202883620894'))
 GENERAL_CHANNEL_ID = int(os.getenv('GENERAL_CHANNEL_ID', '1417466202883620894'))
 ANNOUNCEMENTS_CHANNEL_ID = int(os.getenv('ANNOUNCEMENTS_CHANNEL_ID', '1417466797724012544'))
-LEADERBOARD_CHANNEL_ID = int(os.getenv('LEADERBOARD_CHANNEL_ID', '1417901003516411925'))
 
 # Role IDs for auto-assignment
 ROLE_SELECTION_ROLES = {
-    '🚢': int(os.getenv('MONSTRUM_PLAYER_ROLE_ID', '1417471815147589642')),  # Your main Monstrum role
+    '🎮': int(os.getenv('MEMBER_ROLE_ID', '1417471815147589642')),  # Member role
 }
 
-# Auto-assign role to new members
+# Auto-assign role to new members (Member role)
 AUTO_ROLE_ID = int(os.getenv('AUTO_ROLE_ID', '1417470579774197800'))  # Role given to all new members automatically
 
 # Admin/Moderator role IDs
@@ -46,32 +65,25 @@ ADMIN_ROLES = [
     int(os.getenv('MODERATOR_ROLE_ID', '1417465338278318100')),
 ]
 
+# Announcement role - users with this role can post announcements
+ANNOUNCEMENT_ROLE_ID = int(os.getenv('ANNOUNCEMENT_ROLE_ID', '1435285314129231964'))
+
 # ================================
 # WELCOME MESSAGES
 # ================================
 
-# Horror-themed welcome messages for new members
+# Professional welcome messages for new members (Umbrella Corporation inspired)
 WELCOME_MESSAGES = [
-    "🚢 **{mention}** has boarded the cursed vessel! Welcome to the depths of Monstrum... try not to get eaten! 🦑",
-    "👻 A new soul, **{mention}**, has entered our haunted realm! The monsters are already watching... 👁️",
-    "🎃 **{mention}** has awakened from the nightmare! Welcome to Monstrum - where horror meets the high seas! ⚓",
-    "🕷️ Look what the tide washed ashore... **{mention}** has joined our crew of survivors! Mind the tentacles! 🐙",
-    "⚡ **{mention}** has escaped the lab, only to find themselves here! Welcome to our twisted community! 🧪",
-    "🔥 Another brave soul, **{mention}**, dares to face the unknown! The ship's engine is already rumbling... 🚢",
-    "💀 **{mention}** has entered the belly of the beast! Welcome aboard - hope you brought a flashlight! 🔦",
-    "🌊 The ocean has delivered **{mention}** to our shores! Welcome to Monstrum, where nightmares become reality! 🌙",
-    "🦴 Fresh meat has arrived! Welcome **{mention}** to our horror-loving family! Try not to feed the monsters! 🍖",
-    "🕸️ **{mention}** has stumbled into our web of terror! Welcome to the Monstrum community - enjoy your stay... if you can! 🕷️"
-]
-
-# Welcome embed colors (hex codes)
-WELCOME_COLORS = [
-    0x8B0000,  # Dark Red
-    0x2F4F4F,  # Dark Slate Gray
-    0x191970,  # Midnight Blue
-    0x556B2F,  # Dark Olive Green
-    0x483D8B,  # Dark Slate Blue
-    0x8B4513,  # Saddle Brown
+    "⚡ **{mention}** has joined {company}. Access granted.",
+    "🏢 **{mention}** has been cleared for entry to {company}. Welcome.",
+    "🔬 **{mention}** has been registered in our database. Welcome to {company}.",
+    "⚙️ **{mention}** has entered the facility. Welcome to {company}.",
+    "🎯 **{mention}** has been assigned clearance level: Member. Welcome.",
+    "💼 **{mention}** has joined {company}. Excellence is our standard.",
+    "🛡️ **{mention}** has accessed the network. Systems updated.",
+    "📊 **{mention}** has been added to the roster. Welcome to {company}.",
+    "🔐 **{mention}** - Identity verified. Access to {company} granted.",
+    "⚗️ **{mention}** has joined our operations. Welcome to the corporation.",
 ]
 
 # ================================
@@ -79,78 +91,37 @@ WELCOME_COLORS = [
 # ================================
 
 BOOST_MESSAGES = [
-    "🚀 **{mention}** has supercharged our cursed vessel! The monsters are pleased with this offering! 💜",
-    "⚡ **{mention}** has blessed us with a boost! The ship's power grows stronger! Thank you, brave soul! 🔋",
-    "💎 **{mention}** has upgraded our nightmare! The crew salutes your dedication to our dark cause! 🫡",
-    "🌟 **{mention}** has enhanced our haunted realm! The spirits whisper their gratitude! 👻",
-    "🎉 **{mention}** just boosted our server! The Leviathan itself is impressed! 🐙",
+    "⚡ **{mention}** has upgraded our server capabilities. {company} thanks you for your contribution.",
+    "🚀 **{mention}** has enhanced our systems. Your support strengthens our operations.",
+    "💎 **{mention}** has invested in our infrastructure. {company} recognizes your dedication.",
+    "🌟 **{mention}** has boosted our server. Excellence rewarded with excellence.",
+    "🎉 **{mention}** has amplified our reach. Your contribution is valued.",
 ]
-
-# ================================
-# GAME INFORMATION
-# ================================
-
-# Game-related constants for info commands
-GAME_INFO = {
-    'name': 'Monstrum',
-    'developer': 'Lua Vayra Studio',
-    'genre': 'Survival Horror',
-    'platforms': ['Mobile (iOS/Android)', 'PC (Coming Soon)'],
-    'release_date': '2025 (Mobile), TBA (PC)',
-    'description': 'A survival horror mobile game featuring terrifying monsters across different maps. Escape, survive, and face your fears on mobile devices.',
-    'official_website': 'https://www.monstrumgame.com/',
-    'steam_url': 'https://store.steampowered.com/app/296350/Monstrum/',
-    'mobile_stores': {
-        'ios': 'https://apps.apple.com/app/monstrum-mobile',
-        'android': 'https://play.google.com/store/apps/details?id=com.monstrum.mobile'
-    }
-}
-
-# Monster information for game info commands
-MONSTERS = {
-    'hutman': {
-        'name': 'The Hutman',
-        'description': 'A deranged sheriff who chose to remain in Dusty Town and descended into madness.',
-        'abilities': ['Armed with a revolver', 'Knowledge of the town layout', 'Unpredictable behavior', 'Quick draw skills'],
-        'weakness': 'Limited to Dusty Town area',
-        'emoji': '�',
-        'map': 'Dusty Town'
-    },
-    'shaytan': {
-        'name': 'Shaytan',
-        'description': 'A true demonic entity that has made the Resident map her domain, summoning lesser demons to aid in the hunt.',
-        'abilities': ['Summons demons', 'Supernatural presence', 'Reality manipulation', 'Demonic corruption'],
-        'weakness': 'Holy or blessed items',
-        'emoji': '👹',
-        'map': 'Resident'
-    }
-}
 
 # ================================
 # EMBED STYLING
 # ================================
 
-# Standard embed colors for different types of messages
+# Standard embed colors for different types of messages (Umbrella Corporation theme)
 EMBED_COLORS = {
-    'success': 0x00FF00,
-    'error': 0xFF0000,
-    'warning': 0xFFFF00,
-    'info': 0x00BFFF,
-    'default': 0x8B0000,  # Dark red theme
-    'boost': 0xFF69B4,
-    'welcome': 0x2F4F4F,
-    'game_info': 0x4B0082,
+    'success': THEME_COLORS['success'],
+    'error': THEME_COLORS['error'],
+    'warning': THEME_COLORS['warning'],
+    'info': THEME_COLORS['info'],
+    'default': THEME_COLORS['primary'],
+    'boost': THEME_COLORS['secondary'],
+    'welcome': THEME_COLORS['primary'],
 }
 
 # Bot footer text
-BOT_FOOTER = "Monstrum Bot • Powered by nightmares and caffeine"
+BOT_FOOTER = f"{COMPANY_NAME} • {COMPANY_TAGLINE}"
 
 # ================================
 # DATABASE SETTINGS (for future use)
 # ================================
 
 # SQLite database file name
-DATABASE_FILE = 'monstrum_bot.db'
+DATABASE_FILE = 'lua_corporation_bot.db'
 
 # Database tables we'll need
 DATABASE_TABLES = [
@@ -169,26 +140,8 @@ FEATURES = {
     'boost_tracking': True,
     'invite_tracking': True,
     'role_selection': True,
-    'leaderboard': True,
-    'game_info': True,
     'auto_moderation': False,  # For future implementation
     'ticket_system': True,
-    'auto_leaderboard': True,
-}
-
-# ================================
-# LEADERBOARD CONFIGURATION
-# ================================
-
-# Leaderboard settings
-LEADERBOARD_CONFIG = {
-    'auto_update_interval': 900,  # Update every 15 minutes (in seconds)
-    'top_users_count': 10,  # Show top 10 users
-    'points_per_message': 1,
-    'points_per_reaction': 2,
-    'points_per_invite': 33,  # Each invite gives +33 points
-    'embed_title': '👑 Monstrum Leaderboard - Top Survivors',
-    'embed_description': 'The bravest souls who have survived the longest in our cursed realm...',
 }
 
 # ================================
@@ -201,31 +154,16 @@ TICKET_CONFIG = {
     'support_roles': ADMIN_ROLES,  # Roles that can view all tickets
     'auto_close_hours': 72,  # Auto-close inactive tickets after 72 hours
     'max_tickets_per_user': 3,  # Maximum open tickets per user
-    'embed_color': 0x8B0000,  # Dark red theme
-    'server_name': 'Monstrum',
+    'embed_color': THEME_COLORS['primary'],  # Professional black theme
+    'server_name': COMPANY_NAME,
     'log_channel_id': None,  # Will be set via !setup ticketlog command
     'ticket_types': {
-        '🎮': {'name': 'Game Support', 'description': 'Issues with gameplay, bugs, or technical problems'},
-        '❓': {'name': 'General Help', 'description': 'Questions about the server or community'},
+        '❓': {'name': 'General Support', 'description': 'Questions about the server or community'},
         '⚠️': {'name': 'Report Issue', 'description': 'Report problematic behavior or content'},
         '💡': {'name': 'Suggestions', 'description': 'Suggest new features or improvements'},
-        '🛡️': {'name': 'Moderator Help', 'description': 'Need assistance from a moderator'},
+        '👨‍💼': {'name': 'Admin Contact', 'description': 'Direct contact with administration'},
     }
 }
-
-# ================================
-# API ENDPOINTS (for future game data integration)
-# ================================
-
-# Steam API endpoints for game data
-STEAM_API_BASE = 'https://api.steampowered.com'
-STEAM_APP_ID = '296350'  # Monstrum's Steam App ID
-
-# Game news/update sources
-NEWS_SOURCES = [
-    'https://store.steampowered.com/news/app/296350/',
-    'https://twitter.com/TeamJunkfish',
-]
 
 # ================================
 # LOGGING CONFIGURATION
@@ -241,8 +179,6 @@ MAX_LOG_SIZE = 10 * 1024 * 1024  # 10MB
 
 # Cooldowns for commands (in seconds)
 COMMAND_COOLDOWNS = {
-    'leaderboard': 30,
-    'game_info': 10,
     'role_select': 5,
     'ticket_create': 300,  # 5 minutes between ticket creation
 }
@@ -252,48 +188,23 @@ COMMAND_COOLDOWNS = {
 # ================================
 
 def get_random_color() -> int:
-    """Get a random color from the welcome colors list"""
+    """Get a random color from the theme colors"""
     import random
-    return random.choice(WELCOME_COLORS)
+    colors = [THEME_COLORS['primary'], THEME_COLORS['secondary'], THEME_COLORS['info']]
+    return random.choice(colors)
 
-def get_random_welcome_message(mention: str) -> str:
+def get_random_welcome_message(mention: str, company: str = COMPANY_NAME) -> str:
     """Get a random welcome message with the user mention"""
     import random
     message = random.choice(WELCOME_MESSAGES)
-    return message.format(mention=mention)
+    return message.format(mention=mention, company=company)
 
-def get_random_boost_message(mention: str) -> str:
+def get_random_boost_message(mention: str, company: str = COMPANY_NAME) -> str:
     """Get a random boost message with the user mention"""
     import random
     message = random.choice(BOOST_MESSAGES)
-    return message.format(mention=mention)
+    return message.format(mention=mention, company=company)
 
 def is_admin(user_roles: List[int]) -> bool:
     """Check if user has admin permissions"""
     return any(role_id in ADMIN_ROLES for role_id in user_roles)
-
-# ================================
-# ENVIRONMENT VALIDATION
-# ================================
-
-def validate_config():
-    """Validate that all required configuration is present"""
-    errors = []
-    
-    # Check if token is still the placeholder
-    actual_token = os.getenv('DISCORD_TOKEN', 'YOUR_BOT_TOKEN_HERE')
-    if actual_token == 'YOUR_BOT_TOKEN_HERE':
-        errors.append("Bot token not configured")
-    
-    if GUILD_ID == 123456789012345678:
-        errors.append("Guild ID not configured")
-    
-    return errors
-
-# Run validation when module is imported
-_validation_errors = validate_config()
-if _validation_errors:
-    print("⚠️ Configuration warnings:")
-    for error in _validation_errors:
-        print(f"  - {error}")
-    print("Please update config.py with your actual values!")
